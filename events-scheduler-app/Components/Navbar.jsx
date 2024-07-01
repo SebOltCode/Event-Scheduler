@@ -8,7 +8,7 @@ const Navbar = () => {
             Event Scheduler
             </Link>
             <div className="flex space-x-4">
-                <Link to="" className="text-gray-300 hover:text-white">
+                <Link to="/" className="text-gray-300 hover:text-white">
                 Home
                 </Link>
                 <Link to="LogIn" className="text-gray-300 hover:text-white">

@@ -1,7 +1,7 @@
-import Home from "./Components/home.jsx";
-import MainLayout from "./Components/MainLayout.jsx";
-import Register from "./Components/Register.jsx";
-import Login from "./Components/Login.jsx";
+import Home from "../Components/Home.jsx";
+import MainLayout from "../Components/MainLayout.jsx";
+import Register from "../Components/Register.jsx";
+import LogIn from "../Components/LogIn.jsx";
 
 
 import { 
