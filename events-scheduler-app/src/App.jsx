@@ -1,7 +1,8 @@
-import Home from "../Components/Home.jsx";
-import MainLayout from "../Components/MainLayout.jsx";
-import Register from "../Components/Register.jsx";
-import LogIn from "../Components/LogIn.jsx";
+import Home from "./Components/Home.jsx";
+import MainLayout from "./Components/MainLayout.jsx";
+import Register from "./Components/Register.jsx";
+import LogIn from "./Components/LogIn.jsx";
+import Createevent from "./Components/Createevent.jsx";
 
 
 import { 
@@ -16,6 +17,7 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route index element={<Home />} />
         <Route path="Register" element={<Register />} />
         <Route path="LogIn" element={<LogIn/>} />
+        <Route path="Createevent" element={<Createevent/>} />
       </Route>
 
 ));
