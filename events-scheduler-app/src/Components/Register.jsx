@@ -9,7 +9,7 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault(); 
-        
+
         try {
             const response = await fetch('http://localhost:3001/api/users', {
                 method: 'POST',
@@ -18,7 +18,7 @@ const Register = () => {
                 },
                 body: JSON.stringify({ email, password }),
             });
-            const data = await response.json();
+            await response.json();
             if (response.ok) {
                 
                 console.log('Registration successful');
@@ -27,7 +27,7 @@ const Register = () => {
                 console.log('Registration failed');
             }
         } catch (error) {
-            setErrorMessage('Network error: ' + error.message);
+            console.log('Network error: ' + error.message);
             console.log('Network error:', error);
         }
     };
