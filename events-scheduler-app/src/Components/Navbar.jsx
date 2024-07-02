@@ -17,6 +17,9 @@ const Navbar = () => {
                 <Link to="Register" className="text-gray-300 hover:text-white">
                 Register
                 </Link>
+                <Link to="Createevent" className="text-gray-300 hover:text-white">
+                Createevent
+                </Link>
             </div>
 
 
