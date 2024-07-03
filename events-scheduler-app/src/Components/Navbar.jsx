@@ -19,7 +19,7 @@ const Navbar = () => {
                 <Link to="/" className="text-gray-300 hover:text-white">
                 Home
                 </Link>
-                {/* {!isAuthenticated && ( */}
+                {!isAuthenticated && (
                     <>
                         <Link to="LogIn" className="text-gray-300 hover:text-white">
                         Log in
@@ -29,7 +29,7 @@ const Navbar = () => {
                         </Link>
                     </>
                 )}
-                {/* {isAuthenticated && ( */}
+                {isAuthenticated && (
                     <Link to="Createevent" className="text-gray-300 hover:text-white">
                     Createevent
                     </Link>
