@@ -6,9 +6,18 @@ title: '',
 description: '',
 date: '',
 location: '',
-// organzierId: '',
+id: '',
 
 });
+
+const [organzierId, setorganzierId] = useState('');
+
+useEffect(() => {
+  const storedorganzierId = localStorage.getItem('id');
+  if (storedorganzierId) {
+    setorganzierId(storedorganzierId);
+  }
+}, []);
 
 
 const handleChange = (e) => {
@@ -24,7 +33,8 @@ const handleSubmit = async (e) => {
     const response = await fetch('http://localhost:3001/api/events', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem('api_key')}`
       },
       body: JSON.stringify(formData)
     });
@@ -91,6 +101,11 @@ const handleSubmit = async (e) => {
   <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Location here" className="input input-bordered w-full max-w-xs" />
   <div className="label">
  
+  <span className="label-text">ID Login</span>
+      </div>
+  <input type="text" name="id" value={organzierId} onChange={handleChange} placeholder="ID Login" className="input input-bordered w-full max-w-xs" />
+  <div className="label">
+
 
   </div>
   <button type="submit" className="btn btn-outline"> Add Event </button>
