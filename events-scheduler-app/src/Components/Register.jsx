@@ -3,12 +3,26 @@ import { useState } from 'react';
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
+    const [errorMessage, setErrorMessage] = useState('');
 
+    const validateInput = () => {
+        
+        if (!email || !password) {
+            setErrorMessage('Eines oder beide Eingabefelder sind leer.');
+            return false;
+        }
+        // Hier könnten weitere Validierungen für das Format von E-Mail und Passwort hinzugefügt werden.
+        return true;
+    };
 
 
     const handleSubmit = async (e) => {
         e.preventDefault(); 
+        setErrorMessage('');
+
+        if (!validateInput()) {
+            return; // Validierung fehlgeschlagen, Anfrage nicht senden
+        }
 
         try {
             const response = await fetch('http://localhost:3001/api/users', {
@@ -20,11 +34,17 @@ const Register = () => {
             });
             await response.json();
             if (response.ok) {
-                
+                setErrorMessage("Registration was succesfull!");
                 console.log('Registration successful');
+
             } else {
                 
-                console.log('Registration failed');
+                const data = await response.json();
+                if (data.message === 'User exists') {
+                    setErrorMessage('Der Benutzer existiert bereits in der Datenbank.');
+                } else {
+                    setErrorMessage('Email oder Passwort sind im falschen Format.');
+                }
             }
         } catch (error) {
             console.log('Network error: ' + error.message);
@@ -35,12 +55,13 @@ const Register = () => {
     return (
         <div>
             <h1>Register</h1>
+            {errorMessage && <div style={{color: 'gray'}}>{errorMessage}</div>} {/* Informationsfenster anzeigen */}
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Email:</label>
                     <input
                         type="email"
-                        value={email}
+                        value= { email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
