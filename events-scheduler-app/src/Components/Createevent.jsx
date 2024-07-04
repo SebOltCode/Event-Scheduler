@@ -10,7 +10,10 @@ organizerId: ''
 
 });
 
+const [isHidden, setIsHidden] = useState(true);
+
 const [organzierId, setorganzierId] = useState('');
+
 
 useEffect(() => {
   const storedOrganizerId = localStorage.getItem('id');
@@ -32,6 +35,8 @@ const handleChange = (e) => {
     
 const handleSubmit = async (e) => {
   e.preventDefault();
+
+
   try {
     const response = await fetch('http://localhost:3001/api/events', {
       method: 'POST',
@@ -110,9 +115,9 @@ const handleSubmit = async (e) => {
   <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Location here" className="input input-bordered w-full max-w-xs" />
   <div className="label">
  
-  <span className="label-text">ID Login</span>
+ 
       </div>
-  <input type="number" name="organizerId" value={formData.organizerId} onChange={handleChange} placeholder="ID Login" className="input input-bordered w-full max-w-xs" />
+  <input type="hidden" name="organizerId" value={formData.organizerId} onChange={handleChange} placeholder="ID Login" className="input input-bordered w-full max-w-xs" />
   <div className="label">
 
 
