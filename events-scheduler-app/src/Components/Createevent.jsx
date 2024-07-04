@@ -6,7 +6,7 @@ title: '',
 description: '',
 date: '',
 location: '',
-id: '',
+organizerId: 0
 
 });
 
@@ -103,7 +103,7 @@ const handleSubmit = async (e) => {
  
   <span className="label-text">ID Login</span>
       </div>
-  <input type="text" name="id" value={organzierId} onChange={handleChange} placeholder="ID Login" className="input input-bordered w-full max-w-xs" />
+  <input type="number" name="organizerId" value={organzierId} onChange={handleChange} placeholder="ID Login" className="input input-bordered w-full max-w-xs" />
   <div className="label">
 
 

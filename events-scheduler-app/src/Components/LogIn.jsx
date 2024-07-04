@@ -20,7 +20,8 @@ const LogIn = () => {
             });
             const data= await response.json();
             if (response.ok) {
-                localStorage.setItem('api_key', JSON.stringify(data.token));
+                console.log(data);
+                localStorage.setItem('api_key', data.token);
                 localStorage.setItem('id', JSON.stringify(data.user.id));
             } else {
                 
