@@ -6,16 +6,19 @@ title: '',
 description: '',
 date: '',
 location: '',
-organizerId: 0
+organizerId: ''
 
 });
 
 const [organzierId, setorganzierId] = useState('');
 
 useEffect(() => {
-  const storedorganzierId = localStorage.getItem('id');
-  if (storedorganzierId) {
-    setorganzierId(storedorganzierId);
+  const storedOrganizerId = localStorage.getItem('id');
+  if (storedOrganizerId) {
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      organizerId: storedOrganizerId
+    }));
   }
 }, []);
 
@@ -73,8 +76,14 @@ const handleSubmit = async (e) => {
 <dialog id="my_modal_3" className="modal">
   <div className="modal-box">
   <form onSubmit={handleSubmit}>
-      {/* if there is a button in form, it will close the modal */}
-      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+     
+  <button
+              type="button"
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              onClick={() => document.getElementById('my_modal_3').close()}
+            >
+              ✕
+            </button>
     
     <h3 className="font-bold text-lg">Enter your event data</h3>
     
@@ -103,7 +112,7 @@ const handleSubmit = async (e) => {
  
   <span className="label-text">ID Login</span>
       </div>
-  <input type="number" name="organizerId" value={organzierId} onChange={handleChange} placeholder="ID Login" className="input input-bordered w-full max-w-xs" />
+  <input type="number" name="organizerId" value={formData.organizerId} onChange={handleChange} placeholder="ID Login" className="input input-bordered w-full max-w-xs" />
   <div className="label">
 
 
