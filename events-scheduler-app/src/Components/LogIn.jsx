@@ -1,10 +1,11 @@
+import Home from "./Home.jsx";
 import { useState } from "react";
 const LogIn = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
-    let allUsers = [];
+   const [showHome, setShowHome] = useState(false);
 
 
     const handleSubmit = async (e) => {
@@ -22,6 +23,8 @@ const LogIn = () => {
             if (response.ok) {
                 localStorage.setItem('api_key', JSON.stringify(data.token));
                 localStorage.setItem('id', JSON.stringify(data.user.id));
+                setShowHome(true);
+                alert("Login successful");
             } else {
                 
                alert("email or password is incorrect");
@@ -33,6 +36,10 @@ const LogIn = () => {
     };
     return (
         <>
+        {showHome ? 
+
+            <Home/> :
+            <>
         <h1 className="text-3xl font-bold text-center mt-10">Already have an account ?</h1>
         <form className="flex items-center justify-center flex-col" onSubmit={handleSubmit}>
            <div className="m-3">
@@ -70,6 +77,9 @@ const LogIn = () => {
             <button className="btn btn-info m-5" type="submit">Login</button>
         </form>
         </>
+}
+        </>
+
     );
     }
 export default LogIn;
