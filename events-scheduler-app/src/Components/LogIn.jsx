@@ -1,12 +1,11 @@
 import Home from "./Home.jsx";
 import { useState } from "react";
+import { useOutletContext } from 'react-router-dom';
 const LogIn = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
-   const [showHome, setShowHome] = useState(false);
-
+   const { isAuthenticated,setIsAuthenticated} = useOutletContext();
 
     const handleSubmit = async (e) => {
         e.preventDefault(); 
@@ -24,7 +23,7 @@ const LogIn = () => {
                 console.log(data);
                 localStorage.setItem('api_key', data.token);
                 localStorage.setItem('id', JSON.stringify(data.user.id));
-                setShowHome(true);
+                setIsAuthenticated(true);
                 alert("Login successful");
             } else {
                 
@@ -37,10 +36,8 @@ const LogIn = () => {
     };
     return (
         <>
-        {showHome ? 
-
-            <Home/> :
-            <>
+        {isAuthenticated ? <Home /> : 
+        <>
         <h1 className="text-3xl font-bold text-center mt-10">Already have an account ?</h1>
         <form className="flex items-center justify-center flex-col" onSubmit={handleSubmit}>
            <div className="m-3">
@@ -78,9 +75,8 @@ const LogIn = () => {
             <button className="btn btn-info m-5" type="submit">Login</button>
         </form>
         </>
-}
+        }
         </>
-
     );
     }
 export default LogIn;
