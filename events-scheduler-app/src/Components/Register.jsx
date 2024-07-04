@@ -1,17 +1,23 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
+    
+    
     const validateInput = () => {
         
         if (!email || !password) {
             setErrorMessage('Eines oder beide Eingabefelder sind leer.');
             return false;
         }
-        // Hier könnten weitere Validierungen für das Format von E-Mail und Passwort hinzugefügt werden.
+        if (password.length < 8) {
+            setErrorMessage('Das Passwort muss mindestens 8 Zeichen lang sein.');
+            return false;
+        }
         return true;
     };
 
@@ -32,14 +38,14 @@ const Register = () => {
                 },
                 body: JSON.stringify({ email, password }),
             });
-            await response.json();
+            const data = await response.json();
             if (response.ok) {
-                setErrorMessage("Registration was succesfull!");
+                setErrorMessage("Registration was succesfull, you will be navigated to the Log in section!");
                 console.log('Registration successful');
 
+                setTimeout(() => navigate('/login'), 3000);
             } else {
                 
-                const data = await response.json();
                 if (data.message === 'User exists') {
                     setErrorMessage('Der Benutzer existiert bereits in der Datenbank.');
                 } else {
@@ -54,7 +60,7 @@ const Register = () => {
 
     return (
         <div className="flex items-center justify-center flex-col">
-            <h1 className="text-xl font-bold flex pt-6" >Register</h1>
+            <h1 className="text-2xl font-bold flex pt-6" >Register</h1>
             <p className="text-l font-semibold flex p-4">Welcome to our awesome Event Scheduler App! Here you can create an account if you want to create an Event: </p>
             {errorMessage && <div style={{color: 'gray'}}>{errorMessage}</div>}
             <div className="flex justify-center">
