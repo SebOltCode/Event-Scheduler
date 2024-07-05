@@ -27,7 +27,7 @@ const Register = () => {
         setErrorMessage('');
 
         if (!validateInput()) {
-            return; // Validierung fehlgeschlagen, Anfrage nicht senden
+            return;
         }
 
         try {
@@ -39,14 +39,15 @@ const Register = () => {
                 body: JSON.stringify({ email, password }),
             });
             const data = await response.json();
+            console.log(`Response status: ${response.status}, Response message: ${data.error}`);
             if (response.ok) {
                 setErrorMessage("Registration was succesfull, you will be navigated to the Log in section!");
                 console.log('Registration successful');
 
                 setTimeout(() => navigate('/login'), 3000);
             } else {
-                
-                if (data.message === 'User exists') {
+                console.log(data);
+                if (response.status === 409) {
                     setErrorMessage('Der Benutzer existiert bereits in der Datenbank.');
                 } else {
                     setErrorMessage('Email oder Passwort sind im falschen Format.');
