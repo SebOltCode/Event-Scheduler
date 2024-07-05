@@ -16,6 +16,7 @@ const [organzierId, setorganzierId] = useState('');
 
 
 useEffect(() => {
+  
   const storedOrganizerId = localStorage.getItem('id');
   if (storedOrganizerId) {
     setFormData(prevFormData => ({

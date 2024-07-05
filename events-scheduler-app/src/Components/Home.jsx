@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 const Home = () => {
     const [events, setEvents] = useState([]);
@@ -15,7 +16,7 @@ const Home = () => {
                 setEvents(data.results);
             } else {
                 console.error('Expected an array but got', typeof data);
-                setEvents([]); // Setzen Sie events auf ein leeres Array, um Fehler zu vermeiden
+                setEvents([]); 
             }
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
@@ -36,7 +37,9 @@ const Home = () => {
                         <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()} {new Date(event.date).toLocaleTimeString()}</p>
                         <p><strong>Location:</strong> {event.location}</p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-glass bg-slate-300 hover:bg-slate-500">Edit Event</button>
+                        {/* <button className="btn btn-glass bg-slate-300 hover:bg-slate-500">
+                         <Link to={`/Createevent/${event.id}`}>Edit Event</Link> */}
+                        {/* </button> */}
                         </div>
                     </div>
                 </div>
